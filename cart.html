@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>السلة | MIRNOX</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/style.css"><link rel="icon" href="logo/MIRNOX logo.jpg"></head><body>
+<header class="header"><div class="container nav"><a class="brand" href="index.html"><img class="brand-logo" src="logo/MIRNOX logo.jpg"><span class="brand-name"><b>MIRNOX</b><small>LUXURY WATCHES</small></span></a><nav class="links"><a href="index.html">الرئيسية</a><a href="shop.html">تسوق</a><a href="track.html">تتبع شحنتك</a><a href="policy.html">سياسة التعامل</a><a href="contact.html">تواصل مع خدمة العملاء</a></nav><div class="actions"><a href="cart.html" class="cart-btn">🛒<span class="cart-count">0</span></a><button class="burger">☰</button></div></div></header>
+<section class="section container"><div class="kicker">سلة المشتريات</div><h2 style="color:#0b3b2e;margin:.2rem 0">راجع طلبك قبل الدفع</h2>
+<div class="layout2"><div class="panel" id="items"></div>
+<div class="panel"><h3>ملخص الطلب</h3><div id="sum"></div>
+<div style="display:flex;gap:.5rem;margin:.7rem 0"><input id="coupon" class="input" placeholder="كود الخصم"><button class="btn btn-ghost" onclick="apply()">تطبيق</button></div>
+<a href="checkout.html" class="btn btn-gold" style="width:100%;justify-content:center">إتمام الشراء ←</a>
+<a href="shop.html" class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:.5rem">كمل تسوق</a></div></div></section>
+<footer><div class="copy">© 2026 MIRNOX</div></footer>
+<script src="assets/js/products.js"></script><script src="assets/js/store.js"></script>
+<script>
+let disc=0;
+function render(){
+  const c=getCart(); const box=document.getElementById('items');
+  if(!c.length){box.innerHTML=`<p>سلتك فاضية 😅</p><a class="btn btn-green" href="shop.html">تسوق دلوقتي</a>`;document.getElementById('sum').innerHTML='';return;}
+  box.innerHTML=c.map((it,i)=>{
+    const p=PRODUCTS.find(x=>x.id===it.id); const col=p.colors.find(x=>x.name===it.color)||p.colors[0];
+    return `<div class="cart-item"><a href="product.html?id=${p.id}"><img src="${col.img}"></a>
+    <div style="flex:1"><b>${p.name}</b><div style="color:#6b7a74;font-size:.9rem">اللون: ${it.color}</div>
+    <div class="qty" style="margin-top:.4rem"><button onclick="ch(${i},-1)">−</button><b>${it.qty}</b><button onclick="ch(${i},1)">+</button>
+    <button onclick="rm(${i})" style="background:none;border:0;cursor:pointer">🗑️ احذف</button></div></div>
+    <b>${fmt(p.price*it.qty)}</b></div>`;
+  }).join('');
+  const sub=c.reduce((s,it)=>{const p=PRODUCTS.find(x=>x.id===it.id);return s+p.price*it.qty},0);
+  const ship=sub>5000?0:60; const total=sub+ship-disc;
+  document.getElementById('sum').innerHTML=`<div style="display:flex;justify-content:space-between"><span>المجموع الفرعي</span><b>${fmt(sub)}</b></div><div style="display:flex;justify-content:space-between"><span>الشحن</span><b>${ship===0?'مجاني 🎉':fmt(ship)}</b></div>${disc?`<div style="display:flex;justify-content:space-between;color:green"><span>خصم</span><b>− ${fmt(disc)}</b></div>`:''}<hr><div style="display:flex;justify-content:space-between;font-size:1.2rem"><span>الإجمالي</span><b style="color:#0b3b2e">${fmt(total)}</b></div>`;
+}
+function ch(i,d){let c=getCart();c[i].qty+=d;if(c[i].qty<1)c.splice(i,1);setCart(c);render();}
+function rm(i){let c=getCart();c.splice(i,1);setCart(c);render();}
+function apply(){const v=document.getElementById('coupon').value.trim();if(v==='MIRNOX5'){const c=getCart();const sub=c.reduce((s,it)=>s+PRODUCTS.find(x=>x.id===it.id).price*it.qty,0);disc=Math.round(sub*.05);toast('تم تطبيق خصم 5% 🎉');}else{disc=0;toast('الكود غير صالح');}render();}
+render();
+</script></body></html>
