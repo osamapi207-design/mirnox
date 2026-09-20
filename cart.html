@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>try{var L=localStorage.getItem('mirnox_lang');if(L!=='ar'&&L!=='en'){L=((navigator.language||'en').toLowerCase().indexOf('ar')===0)?'ar':'en';}document.documentElement.lang=L;document.documentElement.dir=L==='ar'?'rtl':'ltr';}catch(e){}</script>
+<title>السلة | MIRNOX</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/style.css"><link rel="icon" href="logo/MIRNOX logo.jpg"></head><body data-page="cart">
+<header class="header"><div class="container nav"><a class="brand" href="index.html"><img class="brand-logo" src="logo/MIRNOX logo.jpg"><span class="brand-name"><b>MIRNOX</b><small>LUXURY WATCHES</small></span></a><nav class="links"><a href="index.html" data-i18n="nav_home">الرئيسية</a><a href="shop.html" data-i18n="nav_shop">تسوق</a><a href="track.html" data-i18n="nav_track">تتبع شحنتك</a><a href="policy.html" data-i18n="nav_policy">سياسة التعامل</a><a href="contact.html" data-i18n="nav_contact">تواصل مع خدمة العملاء</a></nav><div class="actions"><button class="lang-btn" onclick="toggleLang()">EN</button><a href="cart.html" class="cart-btn">🛒<span class="cart-count">0</span></a><button class="burger">☰</button></div></div></header>
+<section class="section container"><div class="kicker" data-i18n="cart_k">سلة المشتريات</div><h2 style="color:#0b3b2e;margin:.2rem 0" data-i18n="cart_h">راجع طلبك قبل الدفع</h2>
+<div class="layout2"><div class="panel" id="items"></div>
+<div class="panel"><h3 data-i18n="cart_sum">ملخص الطلب</h3><div id="sum"></div>
+<div style="display:flex;gap:.5rem;margin:.7rem 0"><input id="coupon" class="input" data-i18n-ph="cart_coupon_ph" placeholder="كود الخصم"><button class="btn btn-ghost" onclick="apply()" data-i18n="cart_apply">تطبيق</button></div>
+<a href="checkout.html" class="btn btn-gold" style="width:100%;justify-content:center" data-i18n="cart_checkout">إتمام الشراء ←</a>
+<a href="shop.html" class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:.5rem" data-i18n="cart_continue">كمل تسوق</a></div></div></section>
+<footer><div class="copy" data-i18n="ft_copy_s">© 2026 MIRNOX</div></footer>
+<script src="assets/js/products.js"></script><script src="assets/js/i18n.js"></script><script src="assets/js/store.js"></script>
+<script>
+let disc=0;
+function render(){
+  const c=getCart(); const box=document.getElementById('items');
+  if(!c.length){box.innerHTML='<p>'+t('cart_empty')+'</p><a class="btn btn-green" href="shop.html">'+t('cart_shop')+'</a>';document.getElementById('sum').innerHTML='';return;}
+  box.innerHTML=c.map((it,i)=>{
+    const p=PRODUCTS.find(x=>x.id===it.id); const col=p.colors.find(x=>x.name===it.color)||p.colors[0];
+    return '<div class="cart-item"><a href="product.html?id='+p.id+'"><img src="'+col.img+'"></a>'
+    +'<div style="flex:1"><b>'+pname(p)+'</b><div style="color:#6b7a74;font-size:.9rem">'+t('cart_color')+' '+cname(it.color)+'</div>'
+    +'<div class="qty" style="margin-top:.4rem"><button onclick="ch('+i+',-1)">−</button><b>'+it.qty+'</b><button onclick="ch('+i+',1)">+</button>'
+    +'<button onclick="rm('+i+')" style="background:none;border:0;cursor:pointer">'+t('cart_remove')+'</button></div></div>'
+    +'<b>'+fmt(p.price*it.qty)+'</b></div>';
+  }).join('');
+  const sub=c.reduce((s,it)=>{const p=PRODUCTS.find(x=>x.id===it.id);return s+p.price*it.qty},0);
+  const ship=sub>5000?0:60; const total=sub+ship-disc;
+  document.getElementById('sum').innerHTML='<div style="display:flex;justify-content:space-between"><span>'+t('cart_sub')+'</span><b>'+fmt(sub)+'</b></div><div style="display:flex;justify-content:space-between"><span>'+t('cart_ship')+'</span><b>'+(ship===0?t('cart_free'):fmt(ship))+'</b></div>'+(disc?'<div style="display:flex;justify-content:space-between;color:green"><span>'+t('cart_disc')+'</span><b>− '+fmt(disc)+'</b></div>':'')+'<hr><div style="display:flex;justify-content:space-between;font-size:1.2rem"><span>'+t('cart_total')+'</span><b style="color:#0b3b2e">'+fmt(total)+'</b></div>';
+}
+function ch(i,d){let c=getCart();c[i].qty+=d;if(c[i].qty<1)c.splice(i,1);setCart(c);render();}
+function rm(i){let c=getCart();c.splice(i,1);setCart(c);render();}
+function apply(){const v=document.getElementById('coupon').value.trim();if(v==='MIRNOX5'){const c=getCart();const sub=c.reduce((s,it)=>s+PRODUCTS.find(x=>x.id===it.id).price*it.qty,0);disc=Math.round(sub*.05);toast(t('cart_disc_ok'));}else{disc=0;toast(t('cart_bad'));}render();}
+render();
+function rerenderLang(){render();}
+</script></body></html>

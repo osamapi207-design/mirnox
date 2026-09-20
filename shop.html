@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>try{var L=localStorage.getItem('mirnox_lang');if(L!=='ar'&&L!=='en'){L=((navigator.language||'en').toLowerCase().indexOf('ar')===0)?'ar':'en';}document.documentElement.lang=L;document.documentElement.dir=L==='ar'?'rtl':'ltr';}catch(e){}</script>
+<title>تسوق | MIRNOX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css"><link rel="icon" href="logo/MIRNOX logo.jpg">
+</head><body data-page="shop">
+<div class="topbar" data-i18n="tb_shop">خصم إضافي 5% عند الدفع أونلاين بكود MIRNOX5</div>
+<header class="header"><div class="container nav">
+<a class="brand" href="index.html"><img class="brand-logo" src="logo/MIRNOX logo.jpg"><span class="brand-name"><b>MIRNOX</b><small>LUXURY WATCHES</small></span></a>
+<nav class="links"><a href="index.html" data-i18n="nav_home">الرئيسية</a><a href="shop.html" class="active" data-i18n="nav_shop">تسوق</a><a href="track.html" data-i18n="nav_track">تتبع شحنتك</a><a href="policy.html" data-i18n="nav_policy">سياسة التعامل</a><a href="contact.html" data-i18n="nav_contact">تواصل مع خدمة العملاء</a></nav>
+<div class="actions"><button class="lang-btn" onclick="toggleLang()">EN</button><a href="cart.html" class="cart-btn">🛒<span class="cart-count">0</span></a><button class="burger">☰</button></div>
+</div></header>
+<section class="section container">
+<div class="sec-head"><div><div class="kicker" data-i18n="shop_k">المتجر</div><h2 data-i18n="shop_h">كل ساعات MIRNOX</h2><p id="count"></p></div>
+<div style="display:flex;gap:.5rem"><select id="cat" class="input" style="width:auto"><option value="" data-i18n="cat_all">كل الفئات</option><option>كلاسيك</option><option>رياضية</option><option>أوتوماتيك</option><option>أطقم</option></select>
+<select id="sort" class="input" style="width:auto"><option value="" data-i18n="sort_new">الأحدث</option><option value="low" data-i18n="sort_low">السعر: من الأقل</option><option value="high" data-i18n="sort_high">السعر: من الأعلى</option><option value="rate" data-i18n="sort_rate">الأعلى تقييماً</option></select></div></div>
+<div class="grid-products" id="grid"></div>
+</section>
+<footer><div class="container foot"><div><h4>MIRNOX</h4><p style="color:#9db8ad" data-i18n="ft_tag">هوية خضراء × ذهبية. أصلي 100%.</p></div><div><h4 data-i18n="ft_shop">تسوق</h4><a href="shop.html" data-i18n="ft_all">كل الساعات</a><a href="cart.html" data-i18n="ft_cart">السلة</a><a href="checkout.html" data-i18n="ft_pay">الدفع</a></div><div><h4 data-i18n="ft_help">مساعدة</h4><a href="track.html" data-i18n="nav_track">تتبع الشحنات</a><a href="policy.html" data-i18n="ft_policy">سياسة التعامل</a><a href="contact.html" data-i18n="ft_contact">خدمة العملاء</a></div><div><h4 data-i18n="ft_touch">تواصل</h4><a href="#" data-i18n="ft_phone">📞 01000000000</a><a href="#" data-i18n="ft_wa">💬 واتساب</a></div></div><div class="copy" data-i18n="ft_copy_s">© 2026 MIRNOX</div></footer>
+<script src="assets/js/products.js"></script><script src="assets/js/i18n.js"></script><script src="assets/js/store.js"></script>
+<script>
+function render(){
+  let list=[...PRODUCTS];
+  const c=document.getElementById('cat').value, s=document.getElementById('sort').value;
+  if(c) list=list.filter(p=>p.cat===c);
+  if(s==='low') list.sort((a,b)=>a.price-b.price);
+  if(s==='high') list.sort((a,b)=>b.price-a.price);
+  if(s==='rate') list.sort((a,b)=>b.rating-a.rating);
+  document.getElementById('grid').innerHTML=list.map(productCard).join('')||'<p>'+t('shop_empty')+'</p>';
+  document.getElementById('count').textContent=num(list.length)+' '+t('shop_count');
+  revealInit();
+}
+function localizeCats(){
+  const sel=document.getElementById('cat');
+  const vals=['','كلاسيك','رياضية','أوتوماتيك','أطقم'];
+  Array.from(sel.options).forEach((o,i)=>{ o.textContent = i===0 ? t('cat_all') : catName(vals[i]); });
+}
+document.getElementById('cat').onchange=render;document.getElementById('sort').onchange=render;localizeCats();render();
+function rerenderLang(){localizeCats();render();}
+</script></body></html>

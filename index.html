@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>try{var L=localStorage.getItem('mirnox_lang');if(L!=='ar'&&L!=='en'){L=((navigator.language||'en').toLowerCase().indexOf('ar')===0)?'ar':'en';}document.documentElement.lang=L;document.documentElement.dir=L==='ar'?'rtl':'ltr';}catch(e){}</script>
+<title>MIRNOX | ساعات فاخرة بهوية تليق بيك</title>
+<meta name="description" content="متجر MIRNOX الرسمي للساعات الفاخرة - ضمان سنتين، شحن لكل المحافظات، دفع آمن">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="logo/MIRNOX logo.jpg">
+</head><body data-page="home">
+<div class="topbar" data-i18n="tb_home">شحن مجاني للطلبات فوق 5000 ج • ضمان سنتين • إرجاع مجاني خلال 14 يوم</div>
+<header class="header"><div class="container nav">
+  <a class="brand" href="index.html"><img class="brand-logo" src="logo/MIRNOX logo.jpg" alt="MIRNOX"><span class="brand-name"><b>MIRNOX</b><small>LUXURY WATCHES</small></span></a>
+  <nav class="links">
+    <a href="index.html" class="active" data-i18n="nav_home">الرئيسية</a>
+    <a href="shop.html" data-i18n="nav_shop">تسوق</a>
+    <a href="track.html" data-i18n="nav_track">تتبع شحنتك</a>
+    <a href="policy.html" data-i18n="nav_policy">سياسة التعامل</a>
+    <a href="contact.html" data-i18n="nav_contact">تواصل مع خدمة العملاء</a>
+  </nav>
+  <div class="actions">
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+    <a href="cart.html" class="cart-btn" aria-label="السلة">🛒<span class="cart-count">0</span></a>
+    <a href="checkout.html" class="btn btn-gold" style="padding:.6rem 1.1rem" data-i18n="nav_buy">اشتري دلوقتي</a>
+    <button class="burger">☰</button>
+  </div>
+</div></header>
+
+<section class="hero"><div class="container hero-inner">
+  <div>
+    <span class="eyebrow" data-i18n="hero_eye">✦ الإصدار الجديد 2026 وصل</span>
+    <h1 data-i18n="hero_h1">وقتك يستاهل <span>MIRNOX</span><br>فخامة تتلبس</h1>
+    <p data-i18n="hero_p">ساعات أصلية بماكينات يابانية وسويسرية، زجاج سافير، وضمان حقيقي سنتين. اختار لونك، وادفع بالطريقة اللي تريحك، وتتبع شحنتك لحد باب البيت.</p>
+    <div class="hero-cta">
+      <a href="shop.html" class="btn btn-gold" data-i18n="hero_shop">تسوق الساعات ⌚</a>
+      <a href="track.html" class="btn" style="background:#fff" data-i18n="hero_track">تتبع شحنتك 📦</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>+4800</b><span data-i18n="stat_l1">عميل سعيد</span></div>
+      <div class="stat"><b>4.9★</b><span data-i18n="stat_l2">متوسط التقييم</span></div>
+      <div class="stat"><b data-i18n="stat_v3">سنتين</b><span data-i18n="stat_l3">ضمان حقيقي</span></div>
+    </div>
+  </div>
+  <div class="hero-card">
+    <img class="hero-img" src="images/571602433_1547066803098524_336441844559600684_n.jpg" alt="MIRNOX">
+    <div style="display:flex;gap:.6rem;margin-top:.8rem">
+      <div style="flex:1;background:rgba(255,255,255,.12);border-radius:12px;padding:.6rem;text-align:center" data-i18n="hero_s1">💳 دفع آمن 100%</div>
+      <div style="flex:1;background:rgba(255,255,255,.12);border-radius:12px;padding:.6rem;text-align:center" data-i18n="hero_s2">🚚 شحن لكل مصر</div>
+      <div style="flex:1;background:rgba(255,255,255,.12);border-radius:12px;padding:.6rem;text-align:center" data-i18n="hero_s3">🎁 تغليف هدايا مجاني</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section container">
+  <div class="sec-head"><div><div class="kicker" data-i18n="sec_best_k">تسوق حسب ذوقك</div><h2 data-i18n="sec_best_h">الأكثر مبيعاً هذا الأسبوع</h2><p data-i18n="sec_best_p">كل منتج ليه صفحة خاصة: سعر، تقييم، وصف، واختيار اللون</p></div><a class="btn btn-ghost" href="shop.html" data-i18n="view_all">عرض الكل ←</a></div>
+  <div class="grid-products" id="homeGrid"></div>
+</section>
+
+<section class="section container">
+  <div class="features">
+    <div class="feat"><div style="font-size:1.8rem">🛡️</div><h3 data-i18n="f1t">ضمان سنتين</h3><p data-i18n="f1d">ضمان مكتوب + صيانة مجانية أول سنة في فروعنا.</p></div>
+    <div class="feat"><div style="font-size:1.8rem">💳</div><h3 data-i18n="f2t">بوابة دفع آمنة</h3><p data-i18n="f2d">فيزا، ماستركارد، فوري، انستاباي، وكاش عند الاستلام.</p></div>
+    <div class="feat"><div style="font-size:1.8rem">📦</div><h3 data-i18n="f3t">تتبع الشحنات</h3><p data-i18n="f3d">رقم تتبع فوري SMS وواتساب + صفحة تتبع لحظي.</p></div>
+    <div class="feat"><div style="font-size:1.8rem">↩️</div><h3 data-i18n="f4t">إرجاع 14 يوم</h3><p data-i18n="f4d">لو معجبتكش لأي سبب، نرجعهالك مجاناً حسب سياسة التعامل.</p></div>
+  </div>
+</section>
+
+<section class="partners section"><div class="container">
+  <div class="marquee"><div class="partner-row marquee-track">
+    <div class="partner"><img src="images/partners/rolex.png" alt="Rolex" loading="lazy"></div>
+    <div class="partner"><img src="images/partners/patek.png" alt="Patek Philippe" loading="lazy"></div>
+    <div class="partner"><img src="images/partners/audemars.png" alt="Audemars Piguet" loading="lazy"></div>
+    <div class="partner"><img src="images/partners/olevs.webp" alt="OLEVS" loading="lazy"></div>
+    <div class="partner"><img src="images/partners/miyota.png" alt="Miyota" loading="lazy"></div>
+    <div class="partner"><img src="images/partners/fawry.png" alt="Fawry" loading="lazy"></div>
+    <div class="partner"><img src="images/partners/paymob.png" alt="Paymob" loading="lazy"></div>
+    <div class="partner"><img src="images/partners/bosta.png" alt="Bosta" loading="lazy"></div>
+  </div></div>
+</div></section>
+
+<section class="section container">
+  <div class="panel" style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,#0b3b2e,#146049);color:#fff;border-color:#0b3b2e">
+    <div style="flex:1;min-width:240px"><h2 style="margin:.2rem 0;color:#e9cf95" data-i18n="home_track_h">تتبع شحنتك في ثانية</h2><p style="margin:0;color:#d8e5de" data-i18n="home_track_p">دخل رقم الأوردر اللي وصلك (مثال: MNX-48291) وهيظهرلك مكان شحنتك بالظبط.</p></div>
+    <form onsubmit="event.preventDefault();location.href='track.html#'+document.getElementById('hq').value" style="display:flex;gap:.5rem;flex:1;min-width:240px">
+      <input id="hq" class="input" placeholder="MNX-....." required>
+      <button class="btn btn-gold" data-i18n="btn_track">تتبع</button>
+    </form>
+  </div>
+</section>
+
+<footer><div class="container foot">
+  <div><h4>MIRNOX</h4><p style="color:#9db8ad;line-height:1.8" data-i18n="ft_about">براند مصري للساعات الفاخرة. هوية خضراء زمردية وذهبية تعكس الفخامة والثقة. جميع الساعات أصلية 100%.</p></div>
+  <div><h4 data-i18n="ft_shop">تسوق</h4><a href="shop.html" data-i18n="ft_all">كل الساعات</a><a href="cart.html" data-i18n="ft_cart">سلة المشتريات</a><a href="checkout.html" data-i18n="ft_pay">الدفع</a><a href="track.html" data-i18n="nav_track">تتبع الشحنات</a></div>
+  <div><h4 data-i18n="ft_help">خدمة العملاء</h4><a href="contact.html" data-i18n="ft_contact">تواصل مع خدمة العملاء</a><a href="policy.html" data-i18n="ft_policy">سياسة التعامل</a><a href="policy.html#return" data-i18n="ft_return">الاستبدال والإرجاع</a><a href="policy.html#warranty" data-i18n="ft_warranty">الضمان</a></div>
+  <div><h4 data-i18n="ft_touch">تواصل</h4><a href="#" data-i18n="ft_phone">📞 01000000000</a><a href="#" data-i18n="ft_wa">💬 واتساب</a><a href="#" data-i18n="ft_addr">📍 القاهرة، مصر</a><a href="#" data-i18n="ft_hours">⏰ يومياً 11ص - 11م</a></div>
+</div><div class="copy" data-i18n="ft_copy">© 2026 MIRNOX — جميع الحقوق محفوظة | صنع بحب في مصر</div></footer>
+<a class="whats" href="https://wa.me/201000000000" target="_blank">💬</a>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/store.js"></script>
+<script>
+document.getElementById('homeGrid').innerHTML = PRODUCTS.slice(0,4).map(productCard).join('');
+revealInit();
+function rerenderLang(){document.getElementById('homeGrid').innerHTML=PRODUCTS.slice(0,4).map(productCard).join('');revealInit();}
+</script>
+</body></html>

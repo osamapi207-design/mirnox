@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>try{var L=localStorage.getItem('mirnox_lang');if(L!=='ar'&&L!=='en'){L=((navigator.language||'en').toLowerCase().indexOf('ar')===0)?'ar':'en';}document.documentElement.lang=L;document.documentElement.dir=L==='ar'?'rtl':'ltr';}catch(e){}</script>
+<title>تتبع الشحنات | MIRNOX</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/style.css"><link rel="icon" href="logo/MIRNOX logo.jpg"></head><body data-page="track">
+<header class="header"><div class="container nav"><a class="brand" href="index.html"><img class="brand-logo" src="logo/MIRNOX logo.jpg"><span class="brand-name"><b>MIRNOX</b><small>LUXURY WATCHES</small></span></a><nav class="links"><a href="index.html" data-i18n="nav_home">الرئيسية</a><a href="shop.html" data-i18n="nav_shop">تسوق</a><a href="track.html" class="active" data-i18n="nav_track">تتبع شحنتك</a><a href="policy.html" data-i18n="nav_policy">سياسة التعامل</a><a href="contact.html" data-i18n="nav_contact">تواصل مع خدمة العملاء</a></nav><div class="actions"><button class="lang-btn" onclick="toggleLang()">EN</button><a href="cart.html" class="cart-btn">🛒<span class="cart-count">0</span></a><button class="burger">☰</button></div></div></header>
+<section class="section container" style="max-width:700px">
+<div class="kicker" data-i18n="tr_k">تتبع الشحنات 📦</div><h2 style="color:#0b3b2e" data-i18n="tr_h">فين الأوردر بتاعي؟</h2>
+<div class="panel"><div style="display:flex;gap:.5rem"><input id="t" class="input" data-i18n-ph="tr_ph" placeholder="دخل رقم الأوردر MNX-....." dir="ltr" style="text-align:center;font-weight:900"><button class="btn btn-gold" onclick="go()" data-i18n="btn_track">تتبع</button></div>
+<p style="font-size:.9rem;color:#6b7a74" data-i18n="tr_hint">اكتب الرقم اللي اتبعتلك في ايميل تأكيد الأوردر.</p>
+<div id="res"></div></div>
+<div class="panel" style="margin-top:1rem"><h3 data-i18n="tr_ship_h">الشحن والتوصيل</h3><p data-i18n="tr_ship_p">Bosta • Aramex • J&T — التوصيل خلال 2-4 أيام عمل. القاهرة والجيزة 1-2 يوم. الشحن مجاني فوق 5000 ج.</p></div>
+</section>
+<footer><div class="copy" data-i18n="ft_copy_s">© 2026 MIRNOX</div></footer>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/store.js"></script>
+<script>
+const DEMO={'MNX-48291':{name:'Demo',total:6850,date:'2026/09/15',status:2}};
+function go(){
+  const v=(document.getElementById('t').value.trim()||location.hash.slice(1)).trim();
+  const orders=Object.assign({},DEMO,JSON.parse(localStorage.getItem('mirnox_orders')||'{}'));
+  const o=orders[v];
+  const box=document.getElementById('res');
+  if(!o){box.innerHTML='<div class="panel" style="background:#fdecea;border-color:#e8a0a0">'+t('tr_notfound')+'</div>';return;}
+  const steps=[t('tr_s1'),t('tr_s2'),t('tr_s3'),t('tr_s4'),t('tr_s5')];
+  const tot=(o.total!==undefined&&o.total!==null)?t('tr_total')+' '+(typeof o.total==='number'?fmt(o.total):o.total):'';
+  box.innerHTML='<hr><p><b dir="ltr">'+v+'</b> • '+o.name+(tot?' • '+tot:'')+'</p>'
+  +'<div class="timeline">'+steps.map((s,i)=>'<div class="step '+(i<=o.status?'done':'')+'"><b>'+s+'</b><div style="color:#6b7a74;font-size:.88rem">'+(i<=o.status?t('tr_done'):t('tr_wait'))+'</div></div>').join('')+'</div>'
+  +'<a class="btn btn-green" href="contact.html">'+t('tr_problem')+'</a>';
+}
+if(location.hash.length>1){document.getElementById('t').value=location.hash.slice(1);go();}
+function rerenderLang(){if(document.getElementById('t').value)go();else document.getElementById('res').innerHTML='';}
+</script></body></html>
